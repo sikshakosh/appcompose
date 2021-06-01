@@ -3,6 +3,7 @@ package com.android.appcompose.composable.utility;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -20,28 +21,35 @@ public class ImagePagerView extends LinearLayout {
     private static final int NUM_PAGES = 5;
     private FragmentStateAdapter pagerAdapter;
     //public int[] drawables = {R.drawable.splash_1,R.drawable.splash_2,R.drawable.splash_3};
-    public int[] drawables = {R.drawable.splash_1,R.drawable.splash_2,R.drawable.splash_3};
+    private int[] drawables;
     public ImagePagerView(Context context, AttributeSet attrs){
         super(context,attrs);
-       /* TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImagePagerView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImagePagerView);
         try
         {
-//            Reference[] entries = (Reference[]) a.getTextArray(R.styleable.ImagePagerView_android_images);
-//            if (entries != null)
-//            {
-//                //do something with the array if you want
-//            }
 
-          //  Reference entry1 = (Reference) a.getTextArray(R.styleable.ImagePagerView_splash_1);
+            int arrayResourceId = a.getResourceId(R.styleable.ImagePagerView_images, 0);
+            if (arrayResourceId != 0) {
+                final TypedArray resourceArray = getResources().obtainTypedArray(arrayResourceId);
+                drawables = new int[resourceArray.length()];
+                for (int i = 0; i < resourceArray.length(); i++) {
+                    final int resourceId = resourceArray.getResourceId(i, 0);
+                    drawables[i] = resourceId;
+                    // do stuff with resourceId, such as getResources().getDrawable(resourceId)
+                }
+                resourceArray.recycle();
+            }
 
+
+
+            Log.d("STYLABLE","hello");
 
         }
         finally
         {
             a.recycle();
-        }*/
-//        
-//        a.recycle();
+        }
+
         setOrientation(LinearLayout.VERTICAL);
         setGravity(Gravity.CENTER_VERTICAL);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

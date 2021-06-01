@@ -2,9 +2,8 @@
 <resources>
 
     <declare-styleable name="ImagePagerView">
-        <attr name="splash_1" format="reference"/>
-        <attr name="splash_2" format="reference"/>
-        <attr name="splash_3" format="reference"/>
+        <attr name="images" format="reference"/>
+
 
     </declare-styleable>
 </resources>
