@@ -1,4 +1,4 @@
-package com.android.appcompose.composable.utility;
+package com.android.appcompose.composable.utility.Slider.Pager;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,21 +14,21 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.appcompose.R;
 
-import java.lang.ref.Reference;
-
-public class ImagePagerView extends LinearLayout {
+public class ImageSliderView extends LinearLayout {
     private ViewPager2 viewPager;
+    private Integer transition;
     private static final int NUM_PAGES = 5;
     private FragmentStateAdapter pagerAdapter;
     //public int[] drawables = {R.drawable.splash_1,R.drawable.splash_2,R.drawable.splash_3};
     private int[] drawables;
-    public ImagePagerView(Context context, AttributeSet attrs){
+    public ImageSliderView(Context context, AttributeSet attrs){
         super(context,attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImagePagerView);
         try
         {
 
             int arrayResourceId = a.getResourceId(R.styleable.ImagePagerView_images, 0);
+            transition = a.getInteger(R.styleable.ImagePagerView_transformer, 0);
             if (arrayResourceId != 0) {
                 final TypedArray resourceArray = getResources().obtainTypedArray(arrayResourceId);
                 drawables = new int[resourceArray.length()];
@@ -39,7 +39,6 @@ public class ImagePagerView extends LinearLayout {
                 }
                 resourceArray.recycle();
             }
-
 
 
             Log.d("STYLABLE","hello");
@@ -56,11 +55,14 @@ public class ImagePagerView extends LinearLayout {
         inflater.inflate(R.layout.view_image_pager, this, true);
 
         viewPager = (ViewPager2) getChildAt(0);
-        viewPager.setPageTransformer(new ImageZoomOutPageTransformer());
+        if(transition==1){
+            viewPager.setPageTransformer(new ImageSliderZoomOutPageTransformer());
+        }
+
         viewPager.setAdapter(new ScreenSlidePagerAdapter((FragmentActivity) context,drawables));
     }
 
-    public ImagePagerView(Context context){
+    public ImageSliderView(Context context){
         this(context,null);
     }
 
@@ -78,8 +80,8 @@ public class ImagePagerView extends LinearLayout {
         }
 
         @Override
-        public ImagePageFragment createFragment(int position) {
-            return  ImagePageFragment.newInstance(position, listDrawables[position]);
+        public ImageSliderFragment createFragment(int position) {
+            return  ImageSliderFragment.newInstance(position, listDrawables[position]);
         }
 
         @Override

@@ -1,4 +1,4 @@
-package com.android.appcompose.composable.utility;
+package com.android.appcompose.composable.utility.Slider.Pager;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-public class ImagePageViewModel extends ViewModel {
+public class ImageSliderViewModel extends ViewModel {
     private MutableLiveData<String> mTitle = new MutableLiveData<>();
     private LiveData<String> mText = Transformations.map(mTitle, new Function<String, String>() {
         @Override
