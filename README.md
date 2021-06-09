@@ -12,12 +12,12 @@ It is suitabe for beginners who want to learn and contribute in this collaborati
 #### How to integrate image slider
 
  - In your activity xml 
- --Add following namespace in your activity xml root
+ -- Add following namespace in your activity xml root
  
  ```Xml
     xmlns:libProj="http://schemas.android.com/apk/res-auto" 
 ```
-  --Add child where you would like to have image pager. You can change the width and height according to your requirement
+  -- Add child where you would like to have image pager. You can change the width and height according to your requirement
  ```Xml
     <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
             android:id="@+id/pager"
