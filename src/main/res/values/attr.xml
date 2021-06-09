@@ -3,7 +3,11 @@
 
     <declare-styleable name="ImagePagerView">
         <attr name="images" format="reference"/>
+        <attr name="transformer" >
+            <enum name="none" value="0" />
+            <enum name="zoomout" value="1" />
 
+        </attr>
 
     </declare-styleable>
 </resources>

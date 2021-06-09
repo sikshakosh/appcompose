@@ -1,4 +1,4 @@
-package com.android.appcompose.composable.utility;
+package com.android.appcompose.composable.utility.Slider.Pager;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.android.appcompose.R;
 
 
-public class ImagePageFragment extends Fragment {
+public class ImageSliderFragment extends Fragment {
     private static final String TAG = "UserHome";
     private int fragmentImage;
 
@@ -27,8 +27,8 @@ public class ImagePageFragment extends Fragment {
 
     }
 
-    public static ImagePageFragment newInstance(int position, int drawable){
-        ImagePageFragment frg = new ImagePageFragment();
+    public static ImageSliderFragment newInstance(int position, int drawable){
+        ImageSliderFragment frg = new ImageSliderFragment();
         Bundle b = new Bundle();
         b.putInt("position",position);
         b.putInt("image",drawable);
