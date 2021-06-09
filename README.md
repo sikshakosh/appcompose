@@ -1,6 +1,6 @@
 # AppCompose Library
 [#Maintainer](https://wideclassrooms.com)
-This library is designed for easily diving into Andriod App Development through through the library components.
+This library is designed for easily diving into Andriod App Development through the library components.
 
 This library is under development so the students in android classroom can understand easily how the application developed in android.
  
@@ -9,8 +9,15 @@ It is suitabe for beginners who want to learn and contribute in this collaborati
 ## Developed Utilities
 
 #### 1 - Image Slider
-## How to 
+#### How to integrate image slider
+
  - In your activity xml 
+ --Add following namespace in your activity xml root
+ 
+ ```Xml
+    xmlns:libProj="http://schemas.android.com/apk/res-auto" 
+```
+  --Add child where you would like to have image pager. You can change the width and height according to your requirement
  ```Xml
     <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
             android:id="@+id/pager"
