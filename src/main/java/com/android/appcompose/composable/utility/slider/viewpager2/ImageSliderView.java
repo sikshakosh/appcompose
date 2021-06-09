@@ -1,4 +1,4 @@
-package com.android.appcompose.composable.utility.Slider.Pager;
+package com.android.appcompose.composable.utility.slider.viewpager2;
 
 import android.content.Context;
 import android.content.res.TypedArray;

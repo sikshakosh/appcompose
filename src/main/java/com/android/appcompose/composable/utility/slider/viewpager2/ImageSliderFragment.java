@@ -1,4 +1,4 @@
-package com.android.appcompose.composable.utility.Slider.Pager;
+package com.android.appcompose.composable.utility.slider.viewpager2;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
