@@ -9,36 +9,8 @@ It is suitabe for beginners who want to learn and contribute in this collaborati
 ## Developed Utilities
 
 #### 1 - Image Slider
-#### How to integrate image slider
+#### 2 - Image Slider with DotIndicator
 
- - In your activity xml 
- 1. Add following namespace in your activity xml root
- 
- ```Xml
-     xmlns:libProj="http://schemas.android.com/apk/res-auto 
-  ```
- 2. Add child where you would like to have image pager. You can change the width and height according to your requirement
- 
- ```Xml
-    <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            libProj:images = "@array/tutorial_images"/>
-```
- - In your arrays.xml
- 
- ```Xml
-    
-    <integer-array name="tutorial_images">
-        <item>@drawable/splash_1</item>
-        <item>@drawable/splash_2</item>
-        <item>@drawable/splash_3</item>
-        <item>@drawable/splash_3</item>
-        <item>@drawable/splash_3</item>
-
-    </integer-array> 
-```
 ## Under Development
 
-#### 1 - Image Slider With Dot Indicator
+#### 1 - Image Slider With Callback methods
