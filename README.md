@@ -15,8 +15,8 @@ It is suitabe for beginners who want to learn and contribute in this collaborati
  1. Add following namespace in your activity xml root
  
  ```Xml
-    xmlns:libProj="http://schemas.android.com/apk/res-auto" 
-```
+     xmlns:libProj="http://schemas.android.com/apk/res-auto 
+  ```
  2. Add child where you would like to have image pager. You can change the width and height according to your requirement
  
  ```Xml
