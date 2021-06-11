@@ -15,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.android.appcompose.R;
 
 public class ImageSliderView extends LinearLayout {
-    private ViewPager2 viewPager;
+    public ViewPager2 viewPager;
     private Integer transition;
     private static final int NUM_PAGES = 5;
     private FragmentStateAdapter pagerAdapter;
