@@ -21,12 +21,12 @@ public class DotIndicator extends LinearLayout {
     public  TabLayout tabLayout;
     public ViewPager2 viewPager2;
     public ImageSliderView imageSliderView;
-    public DotIndicator(@NonNull Context context, ViewPager2 pager2){
+    public DotIndicator(@NonNull Context context, ViewPager2 pager2,int bgColor){
         super(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_dotindicator, this, true);
         tabLayout = (TabLayout) getChildAt(0);
-        tabLayout.setBackgroundColor(Color.TRANSPARENT);
+        tabLayout.setBackgroundColor(bgColor);
         new TabLayoutMediator(tabLayout,pager2,(tab, position) -> {
 
         }).attach();
@@ -39,31 +39,26 @@ public class DotIndicator extends LinearLayout {
 
     public DotIndicator(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-//        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImagePagerView);
-//        try
-//        {
-//
-//            int sliderId = a.getResourceId(R.styleable.DotIndicator_slider, 0);
-//            if (sliderId != 0) {
-//                imageSliderView = findViewById(sliderId);
-//
-//            }
-//
-//
-//            Log.d("STYLABLE","hello");
-//
-//        }
-//        finally
-//        {
-//            a.recycle();
-//        }
-//
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        inflater.inflate(R.layout.view_dotindicator, this, true);
-//        tabLayout = (TabLayout) getChildAt(0);
-//        new TabLayoutMediator(tabLayout,imageSliderView.viewPager,(tab, position) -> {
-//
-//        }).attach();
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImagePagerView);
+        try
+        {
+            int sliderId = a.getResourceId(R.styleable.DotIndicator_slider, 0);
+            if (sliderId != 0) {
+                imageSliderView = findViewById(sliderId);
+            }
+            Log.d("STYLABLE","hello");
+        }
+        finally
+        {
+            a.recycle();
+        }
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.view_dotindicator, this, true);
+        tabLayout = (TabLayout) getChildAt(0);
+        new TabLayoutMediator(tabLayout,imageSliderView.viewPager,(tab, position) -> {
+
+        }).attach();
     }
 
     public DotIndicator(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
