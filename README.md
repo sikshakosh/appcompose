@@ -10,7 +10,9 @@ It is suitabe for beginners who want to learn and contribute in this collaborati
 
 #### 1 - Image Slider
 #### 2 - Image Slider with DotIndicator
+#### 3 - Added Sliding TabLayout 
 
 ## Under Development
 
 #### 1 - Image Slider With Callback methods
+#### 2 - UI Elements
