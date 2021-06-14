@@ -130,6 +130,7 @@ public class AppTabLayout extends HorizontalScrollView {
         }
     }
 
+
     public void hideIndicator(int position) {
         if (tabType != ICON_ONLY) return;
 
@@ -319,6 +320,7 @@ public class AppTabLayout extends HorizontalScrollView {
     public float convertPixelsToDp(float px) {
         return px / ((float) getContext().getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
+
 
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
         private int mScrollState;
