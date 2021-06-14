@@ -1,6 +1,7 @@
 package com.android.appcompose.layout.tabs;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -61,12 +62,20 @@ public class AppTabLayout extends HorizontalScrollView {
     public AppTabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AppTabLayout);
+            int position = 1;
+        try{
+            position = a.getInteger(R.styleable.AppTabLayout_stripPos,1);
+
+        }finally {
+            a.recycle();
+        }
         // Disable the Scroll Bar
         setHorizontalScrollBarEnabled(false);
         // Make sure that the Tab Strips fills this View
         setFillViewport(true);
 
-        mTabStrip = new AppTabStrip(context);
+        mTabStrip = new AppTabStrip(context, position);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 

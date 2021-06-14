@@ -17,6 +17,10 @@
 
     <declare-styleable name="AppTabLayout">
         <attr name="background" format="reference"/>
+        <attr name="stripPos">
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
     </declare-styleable>
 
 </resources>

@@ -24,11 +24,18 @@ class AppTabStrip extends LinearLayout {
     private int mSelectedPosition;
     private float mSelectionOffset;
 
+    private int stripPosition = 1;
     private final SimpleTabColorizer mDefaultTabColorizer;
 
     AppTabStrip(Context context) {
         this(context, null);
     }
+
+    AppTabStrip(Context context, int position) {
+        this(context, null);
+        stripPosition = position;
+    }
+
 
     AppTabStrip(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -97,8 +104,14 @@ class AppTabStrip extends LinearLayout {
 
             mSelectedIndicatorPaint.setColor(color);
 
-            canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
-                    height, mSelectedIndicatorPaint);
+            if(stripPosition==1){ // TOP
+                canvas.drawRect(left, 0, right, mSelectedIndicatorThickness, mSelectedIndicatorPaint);
+            }else{ //Bottom
+                canvas.drawRect(left, height - mSelectedIndicatorThickness, right, height, mSelectedIndicatorPaint);
+            }
+
+
+
         }
 
         // Thin underline along the entire bottom edge
