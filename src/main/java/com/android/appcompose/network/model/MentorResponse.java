@@ -1,18 +1,17 @@
-package com.android.appcompose.network;
+package com.android.appcompose.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ClassroomResponse {
+public class MentorResponse {
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("data")
     @Expose
-    private List<Classroom> data = null;
-
+    private List<Mentor> data = null;
 
     public String getMessage() {
         return message;
@@ -22,11 +21,11 @@ public class ClassroomResponse {
         this.message = message;
     }
 
-    public List<Classroom> getData() {
+    public List<Mentor> getData() {
         return data;
     }
 
-    public void setData(List<Classroom> data) {
+    public void setData(List<Mentor> data) {
         this.data = data;
     }
 }

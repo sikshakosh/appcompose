@@ -1,4 +1,4 @@
-package com.android.appcompose.network;
+package com.android.appcompose.network.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
