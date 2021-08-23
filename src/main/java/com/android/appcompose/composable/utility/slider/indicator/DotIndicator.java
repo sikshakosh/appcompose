@@ -2,7 +2,6 @@ package com.android.appcompose.composable.utility.slider.indicator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ public class DotIndicator extends LinearLayout {
     public DotIndicator(@NonNull Context context, ViewPager2 pager2,int bgColor){
         super(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_dotindicator, this, true);
+        inflater.inflate(R.layout.slider_dotindicator, this, true);
         tabLayout = (TabLayout) getChildAt(0);
         tabLayout.setBackgroundColor(bgColor);
         new TabLayoutMediator(tabLayout,pager2,(tab, position) -> {
@@ -54,7 +53,7 @@ public class DotIndicator extends LinearLayout {
         }
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_dotindicator, this, true);
+        inflater.inflate(R.layout.slider_dotindicator, this, true);
         tabLayout = (TabLayout) getChildAt(0);
         new TabLayoutMediator(tabLayout,imageSliderView.viewPager,(tab, position) -> {
 

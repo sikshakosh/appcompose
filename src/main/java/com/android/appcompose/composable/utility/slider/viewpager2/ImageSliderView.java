@@ -52,7 +52,7 @@ public class ImageSliderView extends LinearLayout {
         setOrientation(LinearLayout.VERTICAL);
         setGravity(Gravity.CENTER_VERTICAL);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.view_image_pager, this, true);
+        inflater.inflate(R.layout.slider_image_pager, this, true);
 
         viewPager = (ViewPager2) getChildAt(0);
         if(transition==1){

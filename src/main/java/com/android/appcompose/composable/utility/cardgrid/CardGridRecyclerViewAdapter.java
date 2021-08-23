@@ -39,7 +39,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.welcome_parent_recyclerview, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardgrid_recyclerview, parent, false);
         return new MyViewHolder(view);
     }
 

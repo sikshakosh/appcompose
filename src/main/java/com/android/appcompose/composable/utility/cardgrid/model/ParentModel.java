@@ -10,8 +10,8 @@ public class ParentModel {
     private DataType type;
 
 
-    public ParentModel(String category,DataType type) {
-        this.itemCategory = category;
+    public ParentModel(DataType type) {
+        this.itemCategory = type.getCaption();
         this.type = type;
         data = new ArrayList<Object>();
 

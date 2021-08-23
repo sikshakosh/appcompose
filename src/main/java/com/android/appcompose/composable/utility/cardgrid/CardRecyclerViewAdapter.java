@@ -56,7 +56,7 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
      */
     @Override
     public CardRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder viewHolder = new CardRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.welcome_grid_item, parent, false));
+        ViewHolder viewHolder = new CardRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.cardgrid_item, parent, false));
         viewHolder.type = this.type;
         return viewHolder;
     }
