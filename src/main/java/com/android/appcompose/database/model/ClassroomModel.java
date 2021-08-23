@@ -1,4 +1,4 @@
-package com.android.appcompose.database;
+package com.android.appcompose.database.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey;
 
 import java.math.BigInteger;
 
-@Entity(tableName = "user_classroom")
-public class UserClassroom {
+@Entity(tableName = "classrooms")
+public class ClassroomModel {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
@@ -47,7 +47,7 @@ public class UserClassroom {
     @ColumnInfo(name = "sync_timestamp")
     private Integer syncTimestamp;
 
-    public UserClassroom(@NonNull Integer id, @NonNull String name, @NonNull String chash, @NonNull String admin, @NonNull String data, @NonNull String members, String invites, Boolean featured, Integer createdTimestamp, Integer syncTimestamp) {
+    public ClassroomModel(@NonNull Integer id, @NonNull String name, @NonNull String chash, @NonNull String admin, @NonNull String data, @NonNull String members, String invites, Boolean featured, Integer createdTimestamp, Integer syncTimestamp) {
         this.id = id;
         this.name = name;
         this.chash = chash;
@@ -60,7 +60,7 @@ public class UserClassroom {
         this.syncTimestamp = syncTimestamp;
     }
 
-    public UserClassroom() {
+    public ClassroomModel() {
     }
 
 

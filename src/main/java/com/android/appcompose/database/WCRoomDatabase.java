@@ -8,13 +8,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.concurrent.Executor;
+import com.android.appcompose.database.dao.ClassroomDao;
+import com.android.appcompose.database.dao.MentorDao;
+import com.android.appcompose.database.model.ClassroomModel;
+import com.android.appcompose.database.model.MentorModel;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserClassroom.class}, version = 1, exportSchema = false)
+@Database(entities = {ClassroomModel.class, MentorModel.class}, version = 1, exportSchema = false)
 public abstract  class WCRoomDatabase extends RoomDatabase {
-    public abstract UserClassroomDao userClassroomDao();
+    public abstract ClassroomDao getClassroomDao();
+    public abstract MentorDao getMentorDao();
     private static volatile WCRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -25,7 +30,7 @@ public abstract  class WCRoomDatabase extends RoomDatabase {
             synchronized (WCRoomDatabase.class){
                 if(INSTANCE==null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), WCRoomDatabase.class, "wc_database")
-                            .addCallback(sWCDatabaseCallback)
+                           // .addCallback(sWCDatabaseCallback)
                            // .allowMainThreadQueries()
                             .build();
                 }
@@ -39,9 +44,9 @@ public abstract  class WCRoomDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             databaseWriteExecutor.execute(()->{
-                UserClassroomDao dao = INSTANCE.userClassroomDao();
+                ClassroomDao dao = INSTANCE.getClassroomDao();
                 dao.deleteAll();
-                UserClassroom uc = new UserClassroom(1, "name","chash", "admiin", "data", "members", "String invites", true, 123456, 1234567);
+                ClassroomModel uc = new ClassroomModel(1, "name","chash", "admiin", "data", "members", "String invites", true, 123456, 1234567);
                 dao.insert(uc);
             });
         }
