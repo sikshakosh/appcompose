@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.android.appcompose.composable.utility.cardgrid.model.CardDataModel" />
+
+        <variable
+            name="itemClickListener"
+            type="com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener" />
+    </data>
+<LinearLayout
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -12,7 +25,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="210dp"
-
+        android:onClick="@{() -> itemClickListener.onItemClicked(model)}"
         app:cardCornerRadius="7dp"
         app:cardElevation="5dp"
         >
@@ -25,7 +38,7 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:background="@color/gray"
+                android:background="@color/gray_600"
                 android:contentDescription="TODO"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/title"
@@ -41,10 +54,10 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal|top"
                 android:maxLines="1"
-                android:text="@string/title"
+                android:text="@{model.title}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
+                android:textColor="@color/black"
 
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/subtitle"
@@ -58,10 +71,10 @@
                 android:ellipsize="end"
                 android:gravity="center_horizontal|top"
                 android:maxLines="1"
-                android:text="@string/title"
+                android:text="@{model.subtitle}"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/colorPrimaryTextDefaultMaterialLight"
+                android:textColor="@color/gray_600"
                 android:textSize="12sp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,4 +86,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
+</layout>
 

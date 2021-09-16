@@ -1,8 +1,10 @@
 package com.android.appcompose.composable.utility.cardgrid;
 
+import com.android.appcompose.composable.utility.cardgrid.model.CardDataModel;
+import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.utils.DataType;
 
 public interface OnCardGridItemClickListener{
-    void onCategoryClicked(DataType category);
-    void onItemClicked(Object item);
+    void onItemCategoryClicked(ParentModel type);
+    void onItemClicked(CardDataModel item);
 }
