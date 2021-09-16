@@ -33,25 +33,20 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
     private ArrayList<Object> data = new ArrayList<Object>();
 
     private Context mContext;
-
+    public CardGridListener listener;
     private DataType type;
     /**
      * Constructor that passes in the sports data and the context
      * @param childData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type) {
+    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type,CardGridListener listener) {
 
         this.mContext = context;
         this.setData((ArrayList<Object>) childData);
         this.type = type;
-
+        this.listener = listener;
     }
-
-
-
-
-
 
     /**
      * Required method for creating the viewholder objects.
@@ -113,16 +108,14 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
 
     @Override
     public void onItemClicked(CardDataModel item) {
-
         Log.d("ADAPTER","ITEM CLICKED");
+        this.listener.onCardClicked(item);
     }
 
     /**
      * ViewHolder class that represents each row of data in the RecyclerView
      */
     class ViewHolder extends RecyclerView.ViewHolder {
-
-
         private DataType type;
         public CardgridItemBinding itemBinding;
         /**
@@ -131,9 +124,6 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
          */
         ViewHolder(View itemView) {
             super(itemView);
-
-
-
         }
 
         public ViewHolder(CardgridItemBinding itemBinding) {
@@ -144,9 +134,7 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
         public void bind(int index, Object obj, DataType type) {
             switch (this.type){
                 case FEATURED_CLASSROOMS:
-
                     ClassroomModel currentSport = (ClassroomModel) obj;
-
                     itemBinding.setVariable(BR.model, new CardDataModel(index,currentSport.getName(), currentSport.getAdmin(), DataType.FEATURED_CLASSROOMS));
 
                     break;
@@ -155,13 +143,10 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
                     MentorModel mentor = (MentorModel)obj;
 
                     itemBinding.setVariable(BR.model, new CardDataModel(index,mentor.getName(), "Teacher", DataType.FEATURED_MENTORS));
-
-
                     String base64EncodedString = mentor.getImage();
                     byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
                     Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
                     itemBinding.image.setImageBitmap(decodedImage);
-
                     break;
                 default:
                     Log.d("","NA");

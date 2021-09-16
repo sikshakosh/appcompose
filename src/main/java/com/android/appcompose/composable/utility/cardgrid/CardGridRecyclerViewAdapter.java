@@ -31,10 +31,11 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
     private ArrayList<ParentModel> parentModelArrayList;
 
     public Context cxt;
-
+    public CardGridListener listener;
     @Override
     public void onItemCategoryClicked(ParentModel model) {
         Log.d("CardGridRecyclerViewAdapter","item clicked");
+        this.listener.onMoreClicked(model);
     }
 
     @Override
@@ -44,10 +45,10 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
 
 
 
-    public CardGridRecyclerViewAdapter(ArrayList<ParentModel> exampleList, Context context  ) {
+    public CardGridRecyclerViewAdapter(ArrayList<ParentModel> exampleList, Context context, CardGridListener listener  ) {
         this.parentModelArrayList = exampleList;
         this.cxt = context;
-
+        this.listener = listener;
     }
 
     @Override
@@ -80,7 +81,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
         holder.itemBinding.setItemClickListener(this);
         holder.bind(currentItem);
         ArrayList<Object>  arrayList  = currentItem.getData();
-        CardRecyclerViewAdapter cardRecyclerViewAdapter = new CardRecyclerViewAdapter(holder.itemBinding.items.getContext(),arrayList,currentItem.getType());
+        CardRecyclerViewAdapter cardRecyclerViewAdapter = new CardRecyclerViewAdapter(holder.itemBinding.items.getContext(),arrayList,currentItem.getType(),listener);
         holder.itemBinding.items.setAdapter(cardRecyclerViewAdapter);
 //        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
 //        holder.childRecyclerView.addItemDecoration(spacesDecoration);
