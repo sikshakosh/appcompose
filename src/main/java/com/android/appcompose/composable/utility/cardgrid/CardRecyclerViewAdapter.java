@@ -11,42 +11,42 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.appcompose.BR;
 import com.android.appcompose.R;
 
+import com.android.appcompose.composable.utility.cardgrid.model.CardDataModel;
+import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
+import com.android.appcompose.databinding.CardgridItemBinding;
 import com.android.appcompose.utils.DataType;
 
 import java.util.ArrayList;
 
 
-public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder>  {
+public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder>  implements OnCardGridItemClickListener {
 
     //Member variables
     private ArrayList<Object> data = new ArrayList<Object>();
-    private OnCardGridItemClickListener listener;
-    private Context mContext;
 
+    private Context mContext;
+    public CardGridListener listener;
     private DataType type;
     /**
      * Constructor that passes in the sports data and the context
      * @param childData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type, OnCardGridItemClickListener listener) {
+    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type,CardGridListener listener) {
 
         this.mContext = context;
         this.setData((ArrayList<Object>) childData);
         this.type = type;
         this.listener = listener;
     }
-
-
-
-
-
 
     /**
      * Required method for creating the viewholder objects.
@@ -56,7 +56,11 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
      */
     @Override
     public CardRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder viewHolder = new CardRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.cardgrid_item, parent, false));
+        CardgridItemBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.cardgrid_item, parent, false);
+        
+        ViewHolder viewHolder = new ViewHolder(binding);
         viewHolder.type = this.type;
         return viewHolder;
     }
@@ -68,13 +72,12 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
      */
     @Override
     public void onBindViewHolder(CardRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClicked(data.get(position));
-            }
-        });
-        holder.bindToObject(data.get(position));
+
+        Object dataModel = data.get(position);
+        holder.bind(position,dataModel, this.type);
+
+        holder.itemBinding.setItemClickListener(this);
+
     }
 
 
@@ -98,61 +101,61 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
         this.data = data;
     }
 
+    @Override
+    public void onItemCategoryClicked(ParentModel type) {
+        Log.d("ADAPTER","ITEM Type CLICKED");
+    }
+
+    @Override
+    public void onItemClicked(CardDataModel item) {
+        Log.d("ADAPTER","ITEM CLICKED");
+        this.listener.onCardClicked(item);
+    }
 
     /**
      * ViewHolder class that represents each row of data in the RecyclerView
      */
     class ViewHolder extends RecyclerView.ViewHolder {
-
-        //Member Variables for the TextViews
-        private TextView mTitleText;
-        private TextView mSubtitleText;
-        private ImageView mImageView;
         private DataType type;
+        public CardgridItemBinding itemBinding;
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
          * @param itemView The rootview of the list_item.xml layout file
          */
         ViewHolder(View itemView) {
             super(itemView);
-
-            //Initialize the views
-            mTitleText = (TextView)itemView.findViewById(R.id.title);
-            mSubtitleText = (TextView)itemView.findViewById(R.id.subtitle);
-            mImageView = (ImageView) itemView.findViewById(R.id.image);
-
         }
 
-        void bindToObject(Object item){
-            //Populate the textviews with data
+        public ViewHolder(CardgridItemBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
+        }
+
+        public void bind(int index, Object obj, DataType type) {
             switch (this.type){
                 case FEATURED_CLASSROOMS:
-                    //Get current sport
-                    ClassroomModel currentSport = (ClassroomModel) item;
-                    //Populate the textviews with data
-                    mTitleText.setText(currentSport.getName());
-                    mSubtitleText.setText(currentSport.getAdmin());
+                    ClassroomModel currentSport = (ClassroomModel) obj;
+                    itemBinding.setVariable(BR.model, new CardDataModel(index,currentSport.getName(), currentSport.getAdmin(), DataType.FEATURED_CLASSROOMS));
+
                     break;
                 case FEATURED_MENTORS:
-                    //Get current sport
-                    MentorModel mentor = (MentorModel)item;
-                    //Populate the textviews with data
-                    mTitleText.setText(mentor.getName());
-                    mSubtitleText.setText("Teacher");
 
+                    MentorModel mentor = (MentorModel)obj;
+
+                    itemBinding.setVariable(BR.model, new CardDataModel(index,mentor.getName(), "Teacher", DataType.FEATURED_MENTORS));
                     String base64EncodedString = mentor.getImage();
                     byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
                     Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
-                    mImageView.setImageBitmap(decodedImage);
+                    itemBinding.image.setImageBitmap(decodedImage);
                     break;
                 default:
                     Log.d("","NA");
             }
 
-
-
-
+            itemBinding.executePendingBindings();
         }
+
+
 
     }
 }
