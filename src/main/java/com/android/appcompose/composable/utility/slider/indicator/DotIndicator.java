@@ -63,4 +63,6 @@ public class DotIndicator extends LinearLayout {
     public DotIndicator(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
+
 }

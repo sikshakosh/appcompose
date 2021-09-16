@@ -26,7 +26,7 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
 
     //Member variables
     private ArrayList<Object> data = new ArrayList<Object>();
-
+    private OnCardGridItemClickListener listener;
     private Context mContext;
 
     private DataType type;
@@ -35,12 +35,12 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
      * @param childData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type) {
+    public CardRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type, OnCardGridItemClickListener listener) {
 
         this.mContext = context;
         this.setData((ArrayList<Object>) childData);
         this.type = type;
-
+        this.listener = listener;
     }
 
 
@@ -68,6 +68,12 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
      */
     @Override
     public void onBindViewHolder(CardRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClicked(data.get(position));
+            }
+        });
         holder.bindToObject(data.get(position));
     }
 
