@@ -28,7 +28,7 @@ import com.android.appcompose.utils.DataType;
 import java.util.ArrayList;
 
 public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRecyclerViewAdapter.MyViewHolder> implements OnCardGridItemClickListener {
-    private ArrayList<ParentModel> parentModelArrayList;
+    public ArrayList<ParentModel> parentModelArrayList;
 
     public Context cxt;
     public CardGridListener listener;
