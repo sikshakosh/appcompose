@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
@@ -31,6 +32,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
     public ArrayList<ParentModel> parentModelArrayList;
 
     public Context cxt;
+    private int spanCount;
     public CardGridListener listener;
     @Override
     public void onItemCategoryClicked(ParentModel model) {
@@ -45,10 +47,11 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
 
 
 
-    public CardGridRecyclerViewAdapter(ArrayList<ParentModel> exampleList, Context context, CardGridListener listener  ) {
+    public CardGridRecyclerViewAdapter(ArrayList<ParentModel> exampleList,int noOfSpan, Context context, CardGridListener listener  ) {
         this.parentModelArrayList = exampleList;
         this.cxt = context;
         this.listener = listener;
+        this.spanCount = noOfSpan;
     }
 
     @Override
@@ -75,13 +78,13 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
         ParentModel currentItem = parentModelArrayList.get(position);
 
 
-        GridLayoutManager manager = new GridLayoutManager(holder.itemBinding.items.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager manager = new GridLayoutManager(holder.itemBinding.items.getContext(), this.spanCount, GridLayoutManager.HORIZONTAL, false);
         holder.itemBinding.items.setLayoutManager(manager);
         holder.itemBinding.items.setHasFixedSize(true);
         holder.itemBinding.setItemClickListener(this);
         holder.bind(currentItem);
         ArrayList<Object>  arrayList  = currentItem.getData();
-        CardRecyclerViewAdapter cardRecyclerViewAdapter = new CardRecyclerViewAdapter(holder.itemBinding.items.getContext(),arrayList,currentItem.getType(),listener);
+        CardRecyclerViewAdapter cardRecyclerViewAdapter = new CardRecyclerViewAdapter(holder.itemBinding.items.getContext(),arrayList,currentItem.getType(), LinearLayout.HORIZONTAL,listener);
         holder.itemBinding.items.setAdapter(cardRecyclerViewAdapter);
 //        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
 //        holder.childRecyclerView.addItemDecoration(spacesDecoration);

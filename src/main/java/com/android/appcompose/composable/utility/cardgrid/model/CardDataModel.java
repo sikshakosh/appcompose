@@ -7,6 +7,8 @@ public class CardDataModel{
     public String title, subtitle;
     public DataType type;
     public int index;
+    public boolean compactHeight;
+    public boolean compactWidth;
     public CardDataModel(int index,String title, String subtitle, DataType type) {
         this.index = index;
         this.title = title;
