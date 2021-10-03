@@ -35,7 +35,8 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
     private int spanCount;
     private CardGridListener listener;
     private int orientation = RecyclerView.VERTICAL;
-
+    private int showHeaderSection = View.VISIBLE;
+    private int showFooterSection = View.VISIBLE;
     @Override
     public void onItemCategoryClicked(ParentModel model) {
         Log.d("CardGridRecyclerViewAdapter","item clicked");
@@ -47,6 +48,13 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
 
     }
 
+    public void setHeaderVisibility(int visibility){
+        this.showHeaderSection = visibility;
+    }
+
+    public void setFooterVisibility(int visibility){
+        this.showFooterSection = visibility;
+    }
 
 
     public CardGridRecyclerViewAdapter(ArrayList<ParentModel> exampleList,int noOfSpan ) {
@@ -68,7 +76,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
                 LayoutInflater.from(parent.getContext()),
                 R.layout.cardgrid_recyclerview, parent, false);
 
-        CardGridRecyclerViewAdapter.MyViewHolder viewHolder = new CardGridRecyclerViewAdapter.MyViewHolder(binding);
+        CardGridRecyclerViewAdapter.MyViewHolder viewHolder = new CardGridRecyclerViewAdapter.MyViewHolder(binding, this.showHeaderSection, this.showFooterSection);
 
         return viewHolder;
 
@@ -108,13 +116,23 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
 
         public CardgridRecyclerviewBinding itemBinding;
 
-        public MyViewHolder(View itemView) {
+
+        public MyViewHolder(View itemView, boolean hideHeader, boolean hideFooter) {
             super(itemView);
 
         }
-        public MyViewHolder(CardgridRecyclerviewBinding itemBinding) {
+        public MyViewHolder(CardgridRecyclerviewBinding itemBinding,int showHeader, int showFooter) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+
+            if(showHeader==View.GONE){
+                this.itemBinding.section.setVisibility(View.GONE);
+
+            }
+            if(showFooter==View.GONE){
+
+                this.itemBinding.more.setVisibility(View.GONE);
+            }
 
         }
         public void bind(ParentModel model) {
