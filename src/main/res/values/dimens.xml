@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="verificationWidthCompact">40dp</dimen>
+    <dimen name="verificationHeightCompact">120dp</dimen>
+    <dimen name="verificationWidthFull">120dp</dimen>
+    <dimen name="verificationHeightFull">120dp</dimen>
+</resources>
