@@ -89,6 +89,14 @@ public class CardRecyclerViewAdapter<T> extends RecyclerView.Adapter<CardRecycle
         layoutParams.width = (int) height;
         view.setLayoutParams(layoutParams);
     }
+
+    @BindingAdapter("android:layout_height")
+    public static void setLayoutHeight(View view, float height) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.height = (int) height;
+        view.setLayoutParams(layoutParams);
+    }
+
     /**
      * Required method that binds the data to the viewholder.
      * @param holder The viewholder into which the data should be put.
