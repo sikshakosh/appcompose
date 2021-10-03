@@ -24,6 +24,7 @@ import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.databinding.CardgridItemBinding;
 import com.android.appcompose.databinding.CardgridRecyclerviewBinding;
+import com.android.appcompose.layout.SpacesItemDecoration;
 import com.android.appcompose.utils.DataType;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
     private int spanCount;
     private CardGridListener listener;
     private int orientation = RecyclerView.VERTICAL;
+
     @Override
     public void onItemCategoryClicked(ParentModel model) {
         Log.d("CardGridRecyclerViewAdapter","item clicked");
@@ -113,6 +115,7 @@ public class CardGridRecyclerViewAdapter extends RecyclerView.Adapter<CardGridRe
         public MyViewHolder(CardgridRecyclerviewBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+
         }
         public void bind(ParentModel model) {
             itemBinding.setVariable(BR.model, model);
